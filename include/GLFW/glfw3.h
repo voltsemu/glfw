@@ -29,6 +29,64 @@
 #ifndef _glfw3_h_
 #define _glfw3_h_
 
+namespace glfw
+{
+    struct window
+    {
+#if defined(_GLFW_WIN32)
+        HWND win32;
+#elif defined(_GLFW_COCOA)
+#elif defined(_GLFW_X11)
+#elif defined(_GLFW_WAYLAND)
+#endif
+    };
+
+    enum class api
+    {
+        none,
+        gl4_6
+    };
+
+    template<api Tapi>
+    window* create(const char* title, uint32_t width, uint32_t height)
+    {
+        if(Tapi == api::None)
+        {
+
+        }
+        else if(Tapi == api::GL4_6)
+        {
+
+        }
+    }
+
+    void destroy(window* window)
+    {
+
+    }
+
+    void poll(window* window)
+    {
+
+    }
+
+    void should_close(window* window)
+    {
+
+    }
+
+#if defined(_GLFW_WIN32)
+    constexpr char* extensions[] = { "VK_KHR_surface", "VK_KHR_win32_surface" };
+#elif defined(_GLFW_COCOA)
+    constexpr char* extensions[] = { "VK_KHR_surface", "VK_MVK_macos_surface", "VK_EXT_metal_surface" };
+#elif defined(_GLFW_X11)
+    constexpr char* extensions[] = { "VK_KHR_surface", "VK_KHR_xlib_surface", "VK_KHR_xcb_surface" };
+#elif defined(_GLFW_WAYLAND)
+    constexpr char* extensions[] = { "VK_KHR_surface", "VK_KHR_wayland_surface" };
+#endif
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
